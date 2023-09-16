@@ -3,3 +3,5 @@ boto3
 pymysql
 uvicorn
 sqlalchemy
+jwt
+python-multipart

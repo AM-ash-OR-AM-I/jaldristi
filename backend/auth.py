@@ -1,14 +1,15 @@
 import datetime
+import os
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 import jwt
-from decouple import config
+
 
 from . import models, database
 
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
