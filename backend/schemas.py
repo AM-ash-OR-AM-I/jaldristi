@@ -30,7 +30,6 @@ class UserInResponse(BaseModel):
     user: User
     access_token: str
     token_type: str
-    user_type: UserType
 
 
 class UserRegister(BaseModel):

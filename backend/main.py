@@ -62,6 +62,10 @@ async def login(user_login: OAuth2PasswordRequestForm = Depends(), db: Session =
 
 @app.post("/register", response_model=schemas.UserInResponse, tags=["Register"])
 async def register(user: schemas.UserRegister, db: Session = Depends(get_db)):
+    # handle when user already exists
+    if db.query(models.User).filter(models.User.username == user.username).first():
+        raise HTTPException(400, "User already exists")
+
     user = models.User(
         username=user.username,
         password=user.password,
@@ -77,7 +81,6 @@ async def register(user: schemas.UserRegister, db: Session = Depends(get_db)):
         user=user,
         access_token=token,
         token_type="Bearer",
-        user_type=user.user_type,
     )
 
 

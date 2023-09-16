@@ -1,8 +1,7 @@
-fastapi
+fastapi==0.84.0
 boto3
 pymysql
 uvicorn
 sqlalchemy
-jwt
+pyjwt~=2.4.0
 python-multipart
-fastapi[all]
