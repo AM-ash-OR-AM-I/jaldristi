@@ -22,6 +22,7 @@ class MenuItem extends StatelessWidget {
           child: NeumorphicButton(
             onPressed: onPressed,
             style: NeumorphicStyle(
+              lightSource: LightSource.top,
               boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
             ),
             child: SizedBox(
