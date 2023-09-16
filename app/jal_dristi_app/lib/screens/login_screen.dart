@@ -27,46 +27,50 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(100.0),
-            child: Center(
-              child: Text(
-                "Login",
-                style: TextStyle(fontSize: 40),
-              ),
-            ),
-          ),
-          ...[
-            NeumorphicTextField(
-              hintText: "Username",
-              controller: _loginController,
-            ),
-            NeumorphicTextField(
-              hintText: "Password",
-              controller: _passwordController,
-            ),
-            const SizedBox(height: 20),
-            NeumorphicButton(
-              onPressed: () => login(),
-              style: NeumorphicStyle(
-                shape: NeumorphicShape.flat,
-                boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(
-                  Radius.circular(35),
-                )),
-                depth: 5,
-              ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(100.0),
+              child: Center(
                 child: Text(
                   "Login",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 40),
                 ),
               ),
-            )
-          ]
-        ],
+            ),
+            ...[
+              NeumorphicTextField(
+                hintText: "Username",
+                controller: _loginController,
+              ),
+              NeumorphicTextField(
+                
+                hintText: "Password",
+                controller: _passwordController,
+              ),
+              const SizedBox(height: 20),
+              NeumorphicButton(
+                onPressed: () => login(),
+                style: NeumorphicStyle(
+                  shape: NeumorphicShape.flat,
+                  boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(
+                    Radius.circular(35),
+                  )),
+                  depth: 5,
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: Text(
+                    "Login",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              )
+            ]
+          ],
+        ),
       ),
     );
   }
