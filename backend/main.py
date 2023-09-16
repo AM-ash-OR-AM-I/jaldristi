@@ -4,6 +4,7 @@ import logging
 
 from fastapi import FastAPI, Depends, HTTPException, Form, UploadFile, File, status, Query
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from . import models, schemas, auth
@@ -15,6 +16,15 @@ LOGGING_LEVEL = os.environ.get("LOGGING_LEVEL", 20)
 logging.basicConfig(format="%(levelname)s - %(message)s", level=logging.INFO)
 
 app = FastAPI()
+origins = ["*"]  # This allows requests from all domains
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 S3 = boto3.resource("s3")
 
