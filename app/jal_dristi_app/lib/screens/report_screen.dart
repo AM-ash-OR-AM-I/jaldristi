@@ -44,7 +44,7 @@ class _ReportingScreenState extends State<ReportingScreen> {
        // centerTitle: true,
         // backgroundColor: Colors.transparent,
         // elevation: 0,
-        title: Text("Report an issue",style: TextStyle(fontSize: 20.0,color: kTextColor,fontWeight: FontWeight.w600,letterSpacing: 1.0),),
+        title: const Text("Report an issue",style: TextStyle(fontSize: 20.0,color: kTextColor,fontWeight: FontWeight.w600,letterSpacing: 1.0),),
       ),
         body: Padding(
       padding: const EdgeInsets.all(24.0),
@@ -90,10 +90,13 @@ class _ReportingScreenState extends State<ReportingScreen> {
                   },
                   items: <String>[
                     'Flood',
-                    'Tide',
-                    'Avalanche',
+                    'Water-Leakage',
+                    'Pipe-Rupture',
                     'Water-Logging',
-                    'Tsunami',
+                    'Drainage Issue',
+                    'Sewer Overflow',
+                    'Sewer Blockage',
+
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
