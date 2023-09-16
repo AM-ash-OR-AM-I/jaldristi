@@ -40,6 +40,7 @@ class Incident(Base):
     valid = Column(Boolean)
     department_id = Column(Integer, ForeignKey("departments.id"))
     closed = Column(Boolean, default=False)
+    category = Column(String(50))
 
     reported_by_id = Column(Integer, ForeignKey("users.id"))
     reported_by = relationship("User", back_populates="reported_incidents")

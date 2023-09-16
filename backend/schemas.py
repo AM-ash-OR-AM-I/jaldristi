@@ -38,21 +38,27 @@ class UserRegister(BaseModel):
     first_name: str
     last_name: str
 
-class IncidentCreate(BaseModel):
+
+class Incident(BaseModel):
+    id: int
     image_url: str
     description: str
     latitude: float
     longitude: float
+    reviewed: bool
+    valid: Optional[bool]
     department_id: int
+    closed: bool
+    category: str
+    reported_by_id: int
+
+    class Config:
+        orm_mode = True
 
 
 class IncidentReview(BaseModel):
     is_valid: bool
     comments: Optional[str] = None
-
-
-class DepartmentAssignment(BaseModel):
-    department_id: int
 
 
 class IncidentClose(BaseModel):

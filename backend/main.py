@@ -1,6 +1,7 @@
 import os
 import boto3
 import logging
+from uuid import uuid4
 
 from fastapi import FastAPI, Depends, HTTPException, Form, UploadFile, File, status, Query
 from fastapi.security import OAuth2PasswordRequestForm
@@ -10,8 +11,8 @@ from sqlalchemy.orm import Session
 from . import models, schemas, auth
 from .database import get_db
 
-S3_BUCKET = os.environ.get("S3_BUCKET")
-S3_REGION = os.environ.get("S3_REGION")
+S3_BUCKET = "jaldristi"
+S3_REGION = "us-east-1"
 LOGGING_LEVEL = os.environ.get("LOGGING_LEVEL", 20)
 logging.basicConfig(format="%(levelname)s - %(message)s", level=logging.INFO)
 
@@ -35,12 +36,8 @@ def s3_upload(data, key):
         Key=key,
         Body=data,
     )
-    object_url = "https://s3-{0}.amazonaws.com/{1}/{2}".format(
-        S3_REGION,
-        S3_BUCKET,
-        key,
-    )
-    return object_url
+    return "https://jaldristi.s3.amazonaws.com/" + key
+
 
 
 @app.post("/login", response_model=schemas.UserInResponse, tags=["Login"])
@@ -84,26 +81,42 @@ async def register(user: schemas.UserRegister, db: Session = Depends(get_db)):
     )
 
 
-@app.post("/api/incidents/", response_model=int)
+@app.post("/api/incidents/", response_model=schemas.Incident, tags=["Incidents"])
 async def create_incident(
-        incident: schemas.IncidentCreate,
         db: Session = Depends(get_db),
         user: schemas.User = Depends(auth.get_current_user),
+        image: UploadFile = File(...),
+        department_id: int = Form(...),
+        category: str = Form(...),
+        description: str = Form(...),
+        latitude: float = Form(...),
+        longitude: float = Form(...),
 ):
+    # Check if department exists
+    if not db.query(models.Department).filter(models.Department.id == department_id).first():
+        raise HTTPException(400, "Department does not exist")
+
+
+    image_data = await image.read()
+    image_key = str(uuid4()) + image.filename
+    image_url = s3_upload(image_data, image_key)
+
     incident = models.Incident(
-        image_url=incident.image_url,
-        description=incident.description,
-        latitude=incident.latitude,
-        longitude=incident.longitude,
-        department_id=incident.department_id,
+        image_url=image_url,
+        description=description,
+        latitude=latitude,
+        longitude=longitude,
+        department_id=department_id,
         reported_by_id=user.id,
         reviewed=False,
         closed=False,
+        category=category,
     )
+
     db.add(incident)
     db.commit()
     db.refresh(incident)
-    return incident.id
+    return incident
 
 
 if __name__ == "__main__":
