@@ -1,16 +1,35 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:jal_dristi_app/common/screen_names.dart';
+import 'package:jal_dristi_app/provider/api.dart';
+import 'package:jal_dristi_app/screens/analysis_screen.dart';
 
 import '../common/image_picker.dart';
 import '../components/menu_item.dart';
 import 'camera_screen.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: NeumorphicAppBar(
+          title: const Text("Jal Drishti"),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Api.removeAuthToken();
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Screens.loginScreen.route,
+                  (route) => false,
+                );
+              },
+              icon: const Icon(Icons.logout),
+            ),
+          ],
+        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: SingleChildScrollView(
@@ -18,7 +37,8 @@ class MyHomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 buildLogo(),
-                buildHeading(),
+                // buildHeading(),
+                const SizedBox(height: 50),
                 buildMenu1(context),
                 buildMenu2(context),
               ],
@@ -74,7 +94,7 @@ class MyHomePage extends StatelessWidget {
           ),
           const SizedBox(width: 25),
           MenuItem(
-            text: "Live reporting",
+            text: "Live Reporting",
             icon: Icons.camera,
             onPressed: () {
               Navigator.of(context).push(
@@ -98,7 +118,12 @@ class MyHomePage extends StatelessWidget {
           MenuItem(
             text: "View Analysis",
             icon: Icons.analytics_rounded,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AnalysisScreen()),
+              );
+            },
           ),
           const SizedBox(width: 20),
           MenuItem(

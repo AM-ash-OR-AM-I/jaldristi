@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
-  static const authority = "xxx.yyy.zzzz";
+  static const authority = "jaldristi.shubhendra.in";
   static final Future<SharedPreferences> _prefs =
       SharedPreferences.getInstance();
 
@@ -33,7 +33,7 @@ class Api {
     log("$username $password");
     try {
       final response = await post(
-        Uri.https(authority, "api/login"),
+        Uri.https(authority, "/login"),
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: "username=$username&password=$password",
       );
@@ -58,8 +58,8 @@ class Api {
     }
   }
 
-  // Translate text
-  static Future<String> translate({
+  // Just for demo purpose [will be replaced]
+  static Future<String> demo({
     required String text,
     required String from,
     required String to,
@@ -82,63 +82,5 @@ class Api {
     );
     log("Translate status = ${response.body}, responseCode = ${response.statusCode}");
     return translatedText;
-  }
-
-  // Delete chat session with the server
-  static Future<String> deleteSession(String sessionId) async {
-    final authToken = await getAuthToken();
-    final response = await delete(
-      Uri.https(authority, "api/delete-session", {"session_id": sessionId}),
-      headers: {
-        HttpHeaders.authorizationHeader: authToken!,
-      },
-    );
-    log("Delete session status = ${response.body}, responseCode = ${response.statusCode}");
-    return response.body;
-  }
-
-  // Get all chat sessions
-  static Future<List<String>> getSessions() async {
-    final authToken = await getAuthToken();
-    final response = await get(
-      Uri.https(authority, "api/get-sessions"),
-      headers: {
-        HttpHeaders.authorizationHeader: authToken!,
-      },
-    );
-    log("Get sessions status = ${response.body}, responseCode = ${response.statusCode}");
-    List<String> sessions =
-        jsonDecode(response.body)["sessions"].cast<String>();
-    return sessions.reversed.toList();
-  }
-
-  // Get chatbot response
-  static Future<String> chat({
-    required String query,
-    required String sessionId,
-  }) async {
-    final authToken = await getAuthToken();
-    final params = {
-      "session_id": sessionId,
-      "user_message": query,
-    };
-    final response = await get(
-      Uri.https(authority, "api/chat", params),
-      headers: {
-        HttpHeaders.authorizationHeader: authToken!,
-      },
-    );
-    log("Get chat response = ${response.body}, responseCode = ${response.statusCode}");
-    switch (response.statusCode) {
-      case 200:
-        String answer = utf8.decode(
-          (jsonDecode(response.body)["message"] as String).runes.toList(),
-        );
-        return answer;
-      case 401:
-        throw Exception("Unauthorized, invalid session id");
-      default:
-        throw Exception("Something went wrong");
-    }
   }
 }

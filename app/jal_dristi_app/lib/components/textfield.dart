@@ -2,7 +2,9 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class NeumorphicTextField extends StatelessWidget {
   final String hintText;
-  const NeumorphicTextField({super.key, required this.hintText});
+  final TextEditingController? controller;
+  const NeumorphicTextField(
+      {super.key, required this.hintText, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class NeumorphicTextField extends StatelessWidget {
           border: InputBorder.none,
           hintText: hintText,
         ),
+        controller: controller,
       ),
     );
   }
