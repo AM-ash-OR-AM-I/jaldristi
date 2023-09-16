@@ -1,0 +1,39 @@
+name: jal_dristi_app
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  camera: ^0.10.3
+  image_cropper: ^3.0.2
+  http: ^0.13.5
+  google_fonts: ^4.0.3
+  provider: ^6.0.4
+  file_picker: ^5.2.5
+  shared_preferences: ^2.2.0
+  loader_overlay: ^2.3.2
+  wakelock: ^0.6.2 
+  flutter_neumorphic:  
+    git: 
+      url: https://github.com/den0206/Flutter-Neumorphic.git
+      ref: feature/remoce_accentcolor
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.11.0
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+# flutter_icons:
+#     android: "launcher_icon"
+#     image_path: "assets/icon/icon.jpeg"
+
+flutter:
+  uses-material-design: true
+  # assets:
+  #   - assets/some_other_icon.png
