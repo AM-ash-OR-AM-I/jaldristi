@@ -15,7 +15,7 @@ class User(BaseModel):
     username: str
     first_name: str
     last_name: str
-    type: UserType
+    user_type: UserType
 
     class Config:
         orm_mode = True

@@ -42,9 +42,6 @@ async def login(user_login: OAuth2PasswordRequestForm = Depends(), db: Session =
     if user is None:
         raise HTTPException(401, "Username or Password is incorrect")
     token = auth.create_token(user)
-    print(user)
-    print(token)
-    print(user.user_type)
     return schemas.UserInResponse(
         user=user,
         access_token=token,
