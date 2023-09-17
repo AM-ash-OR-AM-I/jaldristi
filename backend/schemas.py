@@ -62,6 +62,7 @@ class Incident(BaseModel):
     closed: bool
     category: str
     reported_by_id: int
+    reported_by: User
 
     class Config:
         orm_mode = True
