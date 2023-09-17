@@ -34,6 +34,7 @@
   - [Screenshots](#screenshots)
     - [Mobile app](#mobile-app)
   - [Architecture](#architecture)
+  - [Demo](#demo)
   - [Installation](#installation)
 
 ## Introduction
@@ -75,6 +76,12 @@ In the realm of disaster and crisis management, particularly during flooding eve
 - **Mobile App (Flutter):** Empowers users to report water issues swiftly.
 - **React Web Dashboard:** Provides administrators with real-time insights.
 - **Python AWS Backend:** Ensures robust data processing and storage.
+
+## Demo
+
+<p align="center">
+  <img src="./screenshots/jaldristi-demo.gif">
+</p>
 
 ## Installation
 
