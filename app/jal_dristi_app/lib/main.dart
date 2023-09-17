@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           return const Text('Error checking token');
         } else {
           final initialRoute = (snapshot.data == true)
-              ? Screens.homeScreen.route
+              ? Screens.reportScreen.route
               : Screens.loginScreen.route;
           log(initialRoute);
           return NeumorphicApp(

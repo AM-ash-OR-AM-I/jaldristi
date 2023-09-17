@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jal_dristi_app/screens/report_screen.dart';
 
 import '../screens/camera_screen.dart';
 import '../screens/home_screen.dart';
@@ -14,7 +15,7 @@ getRoute(Screens screenName) {
     case Screens.cameraScreen:
       return (_) => const CameraScreen();
     case Screens.reportScreen:
-      return (_) => const CameraScreen();
+      return (_) => const ReportingScreen();
     default:
       throw Exception("Invalid route");
   }

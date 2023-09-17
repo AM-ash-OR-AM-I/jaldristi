@@ -1,7 +1,7 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:jal_dristi_app/common/screen_names.dart';
 import 'package:jal_dristi_app/provider/api.dart';
-import 'package:jal_dristi_app/screens/analysis_screen.dart';
+
 
 import '../common/image_picker.dart';
 import '../components/menu_item.dart';
@@ -119,10 +119,10 @@ class HomeScreen extends StatelessWidget {
             text: "View Analysis",
             icon: Icons.analytics_rounded,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AnalysisScreen()),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const AnalysisScreen()),
+              // );
             },
           ),
           const SizedBox(width: 20),
