@@ -119,6 +119,20 @@ async def create_incident(
     return incident
 
 
+
+@app.get("/api/incidents/{incident_id}", response_model=schemas.Incident, tags=["Incidents"])
+async def get_incident(
+        db: Session = Depends(get_db),
+        user: schemas.User = Depends(auth.get_current_user),
+        incident_id: int = Query(...),
+):
+    incident = db.query(models.Incident).filter(models.Incident.id == incident_id).first()
+    if incident is None:
+        raise HTTPException(404, "Incident does not exist")
+    return incident
+
+
+
 if __name__ == "__main__":
     import uvicorn
 
