@@ -25,20 +25,22 @@
 ---
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Problem Statement](#problem-statement)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+
+- [Team-14](#team-14)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Problem Statement](#problem-statement)
+  - [Features](#features)
+  - [Screenshots](#screenshots)
+    - [Mobile app](#mobile-app)
+  - [Architecture](#architecture)
+  - [Installation](#installation)
 
 ## Introduction
 
 Welcome to **JalDristi**, a state-of-the-art Water Crowdsourcing and Management Platform! Our mission is to provide a comprehensive solution for crowd-sourcing water-related problems, analyzing geo-referenced images, and efficiently managing water-related issues.
 
-![Dashboard Screenshot](dashboard_screenshot.png)
+<!-- ![Dashboard Screenshot](dashboard_screenshot.png) -->
 
 ## Problem Statement
 
@@ -56,6 +58,13 @@ In the realm of disaster and crisis management, particularly during flooding eve
 - [x] **Python AWS Backend:** Handles image analysis, data processing, and open data sourcing.
 - [x] **Open Sourcing of Data:** Promotes transparency and data-driven decision-making.
 - [x] **Disaster Management Support:** Aids emergency responders and financial loss assessment.
+
+## Screenshots
+
+### Mobile app
+
+![Login Screen](./screenshots/loginscreen.png)| ![Home Screen](./screenshots/homescreen.jpg) | ![Home Screen](./screenshots/reportscreen.jpg) |
+| :----------------------------------------: | :------------------------------------------: | :---:|
 
 ## Architecture
 
