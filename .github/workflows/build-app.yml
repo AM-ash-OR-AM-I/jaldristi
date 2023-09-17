@@ -32,6 +32,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: ${{env.APP_NAME}}-${{github.ref_name}}.apk
-          files: ./app/jal_dristi_app/build/app/outputs/apk/release/app-release.apk
+          files: ./app/jal_dristi_app/build/app/outputs/flutter-apk/app-release.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
