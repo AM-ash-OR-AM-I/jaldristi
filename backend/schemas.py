@@ -3,6 +3,15 @@ from typing import Optional
 from enum import Enum
 
 
+class Department(BaseModel):
+    id: int
+    name: str
+    description: str
+
+    class Config:
+        orm_mode = True
+
+
 class UserType(str, Enum):
     admin = 'admin'
     department = 'department'
@@ -16,6 +25,8 @@ class User(BaseModel):
     first_name: str
     last_name: str
     user_type: UserType
+    department: Optional[Department]
+
 
     class Config:
         orm_mode = True
@@ -47,7 +58,7 @@ class Incident(BaseModel):
     longitude: float
     reviewed: bool
     valid: Optional[bool]
-    department_id: int
+    department: Department
     closed: bool
     category: str
     reported_by_id: int
@@ -65,10 +76,3 @@ class IncidentClose(BaseModel):
     comments: Optional[str] = None
 
 
-class Department(BaseModel):
-    id: int
-    name: str
-    description: str
-
-    class Config:
-        orm_mode = True

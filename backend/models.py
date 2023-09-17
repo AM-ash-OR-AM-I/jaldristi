@@ -16,6 +16,9 @@ class User(Base):
     password = Column(String(200))
     user_type = Column(Enum('admin', 'department', 'reviewer', 'public', name='user_type'))
 
+    department_id = Column(Integer, ForeignKey("departments.id"), nullable=True)
+    department = relationship("Department", uselist=False)
+
     reported_incidents = relationship("Incident", back_populates="reported_by")
 
 
@@ -40,6 +43,8 @@ class Incident(Base):
     reviewed = Column(Boolean, default=False)
     valid = Column(Boolean)
     department_id = Column(Integer, ForeignKey("departments.id"))
+    created_at = Column(TIMESTAMP, default=datetime.datetime.utcnow)
+    department = relationship("Department", uselist=False)
     closed = Column(Boolean, default=False)
     category = Column(String(50))
 

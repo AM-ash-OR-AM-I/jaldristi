@@ -39,7 +39,6 @@ def s3_upload(data, key):
     return "https://jaldristi.s3.amazonaws.com/" + key
 
 
-
 @app.post("/login", response_model=schemas.UserInResponse, tags=["Login"])
 async def login(user_login: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = db.query(models.User).filter(
@@ -96,7 +95,6 @@ async def create_incident(
     if not db.query(models.Department).filter(models.Department.id == department_id).first():
         raise HTTPException(400, "Department does not exist")
 
-
     image_data = await image.read()
     image_key = str(uuid4()) + image.filename
     image_url = s3_upload(image_data, image_key)
@@ -117,7 +115,6 @@ async def create_incident(
     db.commit()
     db.refresh(incident)
     return incident
-
 
 
 @app.get("/api/incidents/{incident_id}", response_model=schemas.Incident, tags=["Incidents"])
@@ -141,6 +138,26 @@ async def get_departments(
     return db.query(models.Department).all()
 
 
+# Get incidents
+@app.get("/api/incidents/", response_model=list[schemas.Incident], tags=["Incidents"])
+async def get_incidents(
+        db: Session = Depends(get_db),
+        user: schemas.User = Depends(auth.get_current_user),
+):
+    # IF user is admin, return all incidents
+    if user.user_type == schemas.UserType.admin:
+        return db.query(models.Incident).all()
+    # If user is department, return all incidents of that department
+    elif user.user_type == schemas.UserType.department:
+        return db.query(models.Incident).filter(models.Incident.department_id == user.department.id).all()
+    # If user is reviewer, return all incidents that are not reviewed
+    elif user.user_type == schemas.UserType.reviewer:
+        return db.query(models.Incident).filter(models.Incident.reviewed == False).all()
+    # If user is public, return all incidents that are reported by that user
+    elif user.user_type == schemas.UserType.public:
+        return db.query(models.Incident).filter(models.Incident.reported_by_id == user.id).all()
+    else:
+        raise HTTPException(400, "Invalid user type")
 
 
 if __name__ == "__main__":
