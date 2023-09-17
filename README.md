@@ -56,7 +56,10 @@ In the realm of disaster and crisis management, particularly during flooding eve
 
 ![Login Screen](./screenshots/loginscreen.png)| ![Home Screen](./screenshots/homescreen.jpg) | ![Home Screen](./screenshots/reportscreen.jpg) |
 | :----------------------------------------: | :------------------------------------------: | :---:|
-![Web1](./screenshots/web1.jpeg)| ![Web2](./screenshots/web2.jpeg) | ![Web3](./screenshots/web3.jpeg) |
+
+![Web1](./screenshots/web1.jpeg)
+![Web2](./screenshots/web2.jpeg)
+![Web3](./screenshots/web3.jpeg)
 
 
 ## Releases
@@ -91,6 +94,12 @@ In the realm of disaster and crisis management, particularly during flooding eve
 To set up the project locally:
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/JalDristi.git
-   cd JalDristi
+  ```bash
+  git clone https://github.com/your-username/JalDristi.git
+  cd JalDristi
+   ```
+
+2. To run flutter app 
+- `cd app/jal_dristi_app`
+- `flutter pub get`
+- `flutter run android`
