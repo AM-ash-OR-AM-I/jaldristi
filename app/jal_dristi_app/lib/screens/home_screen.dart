@@ -2,7 +2,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:jal_dristi_app/common/screen_names.dart';
 import 'package:jal_dristi_app/provider/api.dart';
 
-
 import '../common/image_picker.dart';
 import '../components/menu_item.dart';
 import 'camera_screen.dart';
@@ -127,8 +126,8 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(width: 20),
           MenuItem(
-            text: "Feedback",
-            icon: Icons.question_answer_rounded,
+            text: "Review",
+            icon: Icons.reviews_rounded,
             onPressed: () {},
           ),
         ],

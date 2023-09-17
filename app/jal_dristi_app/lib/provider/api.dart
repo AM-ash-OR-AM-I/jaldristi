@@ -58,29 +58,85 @@ class Api {
     }
   }
 
-  // Just for demo purpose [will be replaced]
-  static Future<String> demo({
-    required String text,
-    required String from,
-    required String to,
+  // Create a new incident
+  static Future<String> createIncident({
+    required String imagePath,
+    required String departmentId,
+    required String description,
+    required String category,
+    String latitude = "27.717245",
+    String longitude = "85.323959",
   }) async {
     final authToken = await getAuthToken();
-    Map<String, String> params = {
-      "text": text,
-      "source_language": from,
-      "target_language": to,
+    MultipartRequest request = MultipartRequest(
+      "POST",
+      Uri.https(authority, "/api/incidents/"),
+    );
+    final body = {
+      "department_id": departmentId,
+      "category": category,
+      "description": description,
+      "latitude": latitude,
+      "longitude": longitude,
     };
-    log("Translate params = $params");
-    final response = await post(
-      Uri.https(authority, "api/translate", params),
-      headers: {
-        HttpHeaders.authorizationHeader: authToken!,
-      },
+    request.headers[HttpHeaders.acceptHeader] = "application/json";
+    request.headers[HttpHeaders.contentTypeHeader] = "multipart/form-data";
+    request.headers[HttpHeaders.authorizationHeader] = authToken!;
+    request.fields.addAll(body);
+    request.files.add(
+      await MultipartFile.fromPath(
+        "image",
+        imagePath,
+        filename: "file1.ppt",
+      ),
     );
-    String translatedText = utf8.decode(
-      (jsonDecode(response.body)["translated"] as String).runes.toList(),
-    );
-    log("Translate status = ${response.body}, responseCode = ${response.statusCode}");
-    return translatedText;
+
+    try {
+      final response = await request.send();
+      log("Create incident status = ${response.statusCode}");
+      switch (response.statusCode) {
+        case 200:
+          return "Success";
+        case 422:
+          return jsonDecode(await response.stream.bytesToString())["detail"]
+              .toString();
+        case 401:
+          return jsonDecode(await response.stream.bytesToString())["detail"]
+              .toString();
+        default:
+          return await response.stream.bytesToString();
+      }
+    } on Exception catch (e) {
+      log(e.toString());
+      return "Something went wrong, please check your internet connection.";
+    }
+  }
+
+  // Get all the departments
+  static Future<String> getDepartments() async {
+    final authToken = await getAuthToken();
+    try {
+      final response = await get(
+        Uri.https(authority, "/api/departments/"),
+        headers: {
+          HttpHeaders.acceptHeader: "application/json",
+          HttpHeaders.authorizationHeader: authToken!,
+        },
+      );
+      log("Get departments status = ${response.statusCode}");
+      switch (response.statusCode) {
+        case 200:
+          return response.body;
+        case 422:
+          return jsonDecode(response.body)["detail"].toString();
+        case 401:
+          return jsonDecode(response.body)["detail"].toString();
+        default:
+          return response.body;
+      }
+    } on Exception catch (e) {
+      log(e.toString());
+      return "Something went wrong, please check your internet connection.";
+    }
   }
 }
