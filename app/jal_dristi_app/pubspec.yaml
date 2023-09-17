@@ -20,6 +20,7 @@ dependencies:
   wakelock: ^0.6.2 
   geolocator: ^8.2.0
   geocoding: ^2.0.4
+  url_launcher: ^6.1.9
   flutter_neumorphic:  
     git: 
       url: https://github.com/den0206/Flutter-Neumorphic.git

@@ -1,6 +1,7 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:jal_dristi_app/common/screen_names.dart';
 import 'package:jal_dristi_app/provider/api.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../common/native_api_calls.dart';
 import '../components/menu_item.dart';
@@ -115,13 +116,13 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           MenuItem(
-            text: "View Analysis",
+            text: "Dashboard",
             icon: Icons.analytics_rounded,
-            onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const AnalysisScreen()),
-              // );
+            onPressed: () async {
+              final url = Uri.parse("https://shubhendra.in/");
+              if (!await launchUrl(url)) {
+                throw Exception('Could not launch $url');
+              }
             },
           ),
           const SizedBox(width: 20),
