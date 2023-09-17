@@ -5,7 +5,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:jal_dristi_app/common/colors.dart';
 import 'package:jal_dristi_app/components/button.dart';
 import 'package:jal_dristi_app/components/textfield.dart';
-import 'package:jal_dristi_app/provider/api.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/report_provider.dart';
@@ -29,13 +28,9 @@ class _ReportingScreenState extends State<ReportingScreen> {
 
   void reportIssue() async {
     if (_validateForm()) {
-      final response = await Api.createIncident(
-        imagePath: context.read<ReportProvider>().path,
-        description: _issueController.text,
-        category: context.read<ReportProvider>().category,
-        departmentId:
-            (context.read<ReportProvider>().selectedDepartment!.id).toString(),
-      );
+      final response = await context
+          .read<ReportProvider>()
+          .reportIncident(_issueController.text);
       log(response);
       if (response == "Success") {
         // ignore: use_build_context_synchronously

@@ -20,9 +20,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '12.x'
-      - run: echo "test" > test.txt
-      - run: cat test.txt
-      - run: pwd
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
@@ -34,13 +31,3 @@ jobs:
         with:
           name: release-apk
           path: app/jal_dristi_app/build/app/outputs/apk/release/app-release.apk
-
-      # Release APK not working
-      # - name: Release APK
-      #   id: upload-release-asset 
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     name: ${{env.APP_NAME}}-${{github.ref_name}}.apk
-      #     files: app/jal_dristi_app/build/app/outputs/apk/release/app-release.apk
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

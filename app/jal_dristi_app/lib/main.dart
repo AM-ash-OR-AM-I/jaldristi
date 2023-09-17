@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
               navigatorKey: navigatorKey,
               theme: NeumorphicThemeData(
                 textTheme: GoogleFonts.josefinSansTextTheme(),
-                lightSource: LightSource.bottomRight,
+                lightSource: LightSource.top,
                 baseColor: kBaseColor,
                 shadowLightColor: kShadowLightColor,
                 shadowDarkColor: kShadowDarkColor,

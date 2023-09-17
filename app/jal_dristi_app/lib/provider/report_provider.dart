@@ -1,8 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:jal_dristi_app/provider/api.dart';
 import 'package:jal_dristi_app/provider/model/department.dart';
+
+import '../common/native_api_calls.dart';
 
 class ReportProvider extends ChangeNotifier {
   String path = "/home/ashucoder/Downloads/flood.jpg";
@@ -50,6 +54,36 @@ class ReportProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String description = "";
-  String address = "";
+  String longitude = "";
+  String latitude = "";
+
+  Future<void> getCurrentPosition() async {
+    final hasPermission = await handleLocationPermission();
+    if (!hasPermission) return;
+    final position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    log("position = $position");
+    longitude = position.longitude.toString();
+    latitude = position.latitude.toString();
+  }
+
+  Future<String> reportIncident(
+    String description,
+  ) async {
+    log("reportIncident called");
+
+    // Get the current location
+    await getCurrentPosition();
+    final response = await Api.createIncident(
+      description: description,
+      category: category,
+      departmentId: selectedDepartment!.id.toString(),
+      imagePath: path,
+      latitude: latitude,
+      longitude: longitude,
+    );
+    log("response = $response");
+    return response;
+  }
 }

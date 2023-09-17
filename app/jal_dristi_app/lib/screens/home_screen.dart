@@ -2,7 +2,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:jal_dristi_app/common/screen_names.dart';
 import 'package:jal_dristi_app/provider/api.dart';
 
-import '../common/image_picker.dart';
+import '../common/native_api_calls.dart';
 import '../components/menu_item.dart';
 import 'camera_screen.dart';
 

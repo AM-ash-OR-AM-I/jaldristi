@@ -64,8 +64,8 @@ class Api {
     required String departmentId,
     required String description,
     required String category,
-    String latitude = "27.717245",
-    String longitude = "85.323959",
+    String latitude = "NA",
+    String longitude = "NA",
   }) async {
     final authToken = await getAuthToken();
     MultipartRequest request = MultipartRequest(

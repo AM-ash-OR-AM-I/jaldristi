@@ -32,11 +32,21 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 80, bottom: 20),
+              child: Center(
+                child: Icon(
+                  Icons.water_drop_rounded,
+                  size: 100,
+                  color: Colors.blue.shade900,
+                ),
+              ),
+            ),
             const Padding(
               padding: EdgeInsets.all(100.0),
               child: Center(
                 child: Text(
-                  "Login",
+                  "Jal Drishti",
                   style: TextStyle(fontSize: 40),
                 ),
               ),
@@ -49,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               NeumorphicTextField(
                 hintText: "Password",
                 controller: _passwordController,
+                last: true,
               ),
               const SizedBox(height: 20),
               MyNeumorphicButton(

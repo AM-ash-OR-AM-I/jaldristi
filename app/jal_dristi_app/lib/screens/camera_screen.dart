@@ -5,7 +5,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../common/image_picker.dart';
+import '../common/native_api_calls.dart';
 import '../common/screen_names.dart';
 import '../provider/report_provider.dart';
 
@@ -82,6 +82,7 @@ class _CameraScreenState extends State<CameraScreen> {
       navigator.pushNamed(
         Screens.reportScreen.route,
       );
+      
 
       // DiseaseProvider.detectDisease(imagePath).then((value) {
       //   log("value : $value");

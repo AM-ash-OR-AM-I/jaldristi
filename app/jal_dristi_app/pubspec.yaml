@@ -18,6 +18,8 @@ dependencies:
   shared_preferences: ^2.2.0
   loader_overlay: ^2.3.2
   wakelock: ^0.6.2 
+  geolocator: ^8.2.0
+  geocoding: ^2.0.4
   flutter_neumorphic:  
     git: 
       url: https://github.com/den0206/Flutter-Neumorphic.git
@@ -35,5 +37,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # assets:
-  #   - assets/some_other_icon.png
+  assets:
+    - assets/

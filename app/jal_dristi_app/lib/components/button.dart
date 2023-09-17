@@ -19,6 +19,7 @@ class MyNeumorphicButton extends StatelessWidget {
           Radius.circular(35),
         )),
         depth: 5,
+        lightSource: LightSource.top,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
