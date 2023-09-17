@@ -63,3 +63,12 @@ class IncidentReview(BaseModel):
 
 class IncidentClose(BaseModel):
     comments: Optional[str] = None
+
+
+class Department(BaseModel):
+    id: int
+    name: str
+    description: str
+
+    class Config:
+        orm_mode = True

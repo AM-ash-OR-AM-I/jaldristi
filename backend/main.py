@@ -44,8 +44,8 @@ def s3_upload(data, key):
 async def login(user_login: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = db.query(models.User).filter(
         models.User.username == user_login.username,
-                models.User.password == user_login.password,
-                                        ).first()
+        models.User.password == user_login.password,
+    ).first()
     if user is None:
         raise HTTPException(401, "Username or Password is incorrect")
     token = auth.create_token(user)
@@ -130,6 +130,16 @@ async def get_incident(
     if incident is None:
         raise HTTPException(404, "Incident does not exist")
     return incident
+
+
+# Get all departments
+@app.get("/api/departments/", response_model=list[schemas.Department], tags=["Departments"])
+async def get_departments(
+        db: Session = Depends(get_db),
+        user: schemas.User = Depends(auth.get_current_user),
+):
+    return db.query(models.Department).all()
+
 
 
 

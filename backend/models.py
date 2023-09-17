@@ -24,6 +24,7 @@ class Department(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(50), unique=True, index=True)
+    description = Column(String(200))
 
     incidents = relationship("Incident", back_populates="assigned_department")
 
