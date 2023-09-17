@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Departments from "./Departments";
+import { useNavigate } from "react-router-dom";
+import PersonalIssues from "./PersonalIssues";
+import ReviewerIssues from "./ReviewerIssues";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const userType = localStorage.getItem("userType");
+
+  useEffect(() => {
+    if (userType === "department") {
+      const departmentId = JSON.parse(localStorage.getItem("departmentId"));
+      if (departmentId) {
+        const dept_id = departmentId - 1;
+        navigate(`/dashboard/${dept_id}`);
+      }
+    }
+  }, [userType, navigate]);
+
   const DepartmentCard = ({ department, index }) => {
-    // Define an onClick handler for the card that redirects to /dashboard/{index}
     const handleCardClick = () => {
-      // Redirect to the appropriate URL
-      window.location.href = `/dashboard/${index}`;
+      navigate(`/dashboard/${index}`);
     };
 
     return (
       <div
         className="bg-white border rounded-lg p-4 m-4 w-64 shadow-md"
-        onClick={handleCardClick} // Add the onClick handler to the card
+        onClick={handleCardClick}
       >
         <img
           src={department.logoUrl}
@@ -34,10 +47,16 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1>Welcome to the Dashboard</h1>
-      <p>User Type: {userType}</p>
+      <h1 className="text-4xl font-bold text-center mt-8">
+        Welcome to the Dashboard
+      </h1>
+      <p className="text-lg text-center text-gray-600 mt-4">
+        User Type: {userType}
+      </p>
       <div className="flex flex-wrap justify-center">
-        {userType === "public" && departmentCards}
+        {userType === "admin" && departmentCards}
+        {userType === "public" && <PersonalIssues />}
+        {userType === "reviewer" && <ReviewerIssues />}
       </div>
     </div>
   );

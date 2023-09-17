@@ -33,8 +33,15 @@ const Register = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Registration successful");
+        console.log(data);
+        const departmentId = data.user.department?.id;
+        localStorage.setItem("departmentId", departmentId);
+        const id = data.user.id;
+        localStorage.setItem("id", id);
         const userType = data.user.user_type;
         localStorage.setItem("userType", userType);
+        const access_token = data.access_token;
+        localStorage.setItem("access_token", access_token);
         navigate("/dashboard");
       } else {
         console.error("Registration failed");
