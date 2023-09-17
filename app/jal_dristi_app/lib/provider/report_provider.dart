@@ -27,6 +27,8 @@ class ReportProvider extends ChangeNotifier {
     'Drainage Issue',
     'Sewer Overflow',
     'Sewer Blockage',
+    "Water supply issue",
+    "Water scarcity",
   ];
 
   List<Department> departments = [];
