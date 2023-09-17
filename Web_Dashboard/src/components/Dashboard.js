@@ -1,43 +1,44 @@
 import React from "react";
-import { useUserContext } from "./UserContext";
+import Departments from "./Departments";
 
 const Dashboard = () => {
-  const { userType } = useUserContext();
+  const userType = localStorage.getItem("userType");
+  const DepartmentCard = ({ department, index }) => {
+    // Define an onClick handler for the card that redirects to /dashboard/{index}
+    const handleCardClick = () => {
+      // Redirect to the appropriate URL
+      window.location.href = `/dashboard/${index}`;
+    };
 
-  const departments = [
-    {
-      name: "Department of Water Resources",
-      description: "Responsible for water resource management.",
-    },
-    {
-      name: "Ministry of Jal Shakti",
-      description: "Works on water-related policies and programs.",
-    },
-  ];
+    return (
+      <div
+        className="bg-white border rounded-lg p-4 m-4 w-64 shadow-md"
+        onClick={handleCardClick} // Add the onClick handler to the card
+      >
+        <img
+          src={department.logoUrl}
+          alt={`${department.name} Logo`}
+          className="h-32 w-32 object-contain mx-auto mb-2"
+        />
+        <h2 className="text-lg font-semibold">{department.name}</h2>
+        <p className="text-gray-600">{department.description}</p>
+      </div>
+    );
+  };
 
-  const table = (
-    <table className="table-auto">
-      <thead>
-        <tr>
-          <th className="px-4 py-2">Department Name</th>
-          <th className="px-4 py-2">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        {departments.map((department, index) => (
-          <tr key={index}>
-            <td className="border px-4 py-2">{department.name}</td>
-            <td className="border px-4 py-2">{department.description}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+  const departmentCards = Departments.map((department, index) => (
+    <div key={index} className="flex mb-4">
+      <DepartmentCard department={department} index={index} />
+    </div>
+  ));
+
   return (
     <div>
       <h1>Welcome to the Dashboard</h1>
       <p>User Type: {userType}</p>
-      {userType === "department" && table}
+      <div className="flex flex-wrap justify-center">
+        {userType === "public" && departmentCards}
+      </div>
     </div>
   );
 };

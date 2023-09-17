@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Public from "./Public";
-import { useUserContext } from "./UserContext";
 
 const Login = () => {
-  const { setUserType } = useUserContext();
-
   const [formData, setFormData] = useState({
     grant_type: "",
     username: "",
@@ -40,7 +37,7 @@ const Login = () => {
         const data = await response.json();
         console.log("Login successful");
         const userType = data.user.user_type;
-        setUserType(userType);
+        localStorage.setItem("userType", userType);
         navigate("/dashboard");
       } else {
         console.error("Login failed");
