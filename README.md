@@ -30,9 +30,9 @@
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Problem Statement](#problem-statement)
-  - [Features](#features)
   - [Screenshots](#screenshots)
-    - [Mobile app](#mobile-app)
+  - [Releases](#releases)
+  - [Features](#features)
   - [Architecture](#architecture)
   - [Demo](#demo)
   - [Installation](#installation)
@@ -52,6 +52,18 @@ Welcome to **JalDristi**, a state-of-the-art Water Crowdsourcing and Management 
 
 In the realm of disaster and crisis management, particularly during flooding events, water quality issues, urban flooding, and drainage problems, geo-referenced images shared by citizens are invaluable. **JalDristi** categorizes water-related problems, facilitates open data sourcing, and assists administrators in proactive water management.
 
+## Screenshots
+
+![Login Screen](./screenshots/loginscreen.png)| ![Home Screen](./screenshots/homescreen.jpg) | ![Home Screen](./screenshots/reportscreen.jpg) |
+| :----------------------------------------: | :------------------------------------------: | :---:|
+![Web1](./screenshots/web1.jpeg)| ![Web2](./screenshots/web2.jpeg) | ![Web3](./screenshots/web3.jpeg) |
+
+
+## Releases
+
+- **JalDrishti Version 0.0.2**  : [Download from here](https://github.com/ITER-SIH/Team-14/releases/tag/v0.0.2-alpha)
+- **Deployed Dashboard**  : [Visit here](shubhendra.in/dashboard)
+
 ## Features
 
 - [x] **Mobile App (Flutter):** Capture and submit water-related problems with geo-referenced images.
@@ -60,16 +72,7 @@ In the realm of disaster and crisis management, particularly during flooding eve
 - [x] **Open Sourcing of Data:** Promotes transparency and data-driven decision-making.
 - [x] **Disaster Management Support:** Aids emergency responders and financial loss assessment.
 
-## Screenshots
-
-### Mobile app
-
-![Login Screen](./screenshots/loginscreen.png)| ![Home Screen](./screenshots/homescreen.jpg) | ![Home Screen](./screenshots/reportscreen.jpg) |
-| :----------------------------------------: | :------------------------------------------: | :---:|
-
 ## Architecture
-
-![System Architecture](architecture.png)
 
 **JalDristi** comprises three essential components:
 
