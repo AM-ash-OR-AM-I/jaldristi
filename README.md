@@ -62,7 +62,7 @@ In the realm of disaster and crisis management, particularly during flooding eve
 ## Releases
 
 - **JalDrishti Version 0.0.2**  : [Download from here](https://github.com/ITER-SIH/Team-14/releases/tag/v0.0.2-alpha)
-- **Deployed Dashboard**  : [Visit here](shubhendra.in/dashboard)
+- **Deployed Dashboard**  : [Visit here](https://shubhendra.in)
 
 ## Features
 
