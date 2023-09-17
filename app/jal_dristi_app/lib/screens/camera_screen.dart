@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../common/image_picker.dart';
+import '../common/screen_names.dart';
+import '../provider/report_provider.dart';
 
 enum Camera { backCamera, frontCamera }
 
@@ -65,7 +68,8 @@ class _CameraScreenState extends State<CameraScreen> {
 
   Future<void> _takePhoto() async {
     try {
-      final navigatorKey = GlobalKey<NavigatorState>();
+      final navigator = Navigator.of(context);
+      final model = context.read<ReportProvider>();
       final String imagePath =
           '${(await getTemporaryDirectory()).path}/${DateTime.now()}.png';
       setState(() {});
@@ -74,12 +78,10 @@ class _CameraScreenState extends State<CameraScreen> {
       picture.saveTo(imagePath);
 
       log("hurraahhh  : $imagePath");
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => ImagePreview(imagePath: imagePath),
-      //   ),
-      // );
+      model.path = imagePath;
+      navigator.pushNamed(
+        Screens.reportScreen.route,
+      );
 
       // DiseaseProvider.detectDisease(imagePath).then((value) {
       //   log("value : $value");
