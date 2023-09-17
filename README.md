@@ -103,3 +103,7 @@ To set up the project locally:
 - `cd app/jal_dristi_app`
 - `flutter pub get`
 - `flutter run android`
+
+## Credentials (For Testing)
+- For admin -> username: `admin`, password: `admin`
+- For reporter -> username: `ashu`, password: `ashu123`
