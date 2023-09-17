@@ -4,6 +4,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:jal_dristi_app/provider/api.dart';
 
 import '../common/screen_names.dart';
+import '../components/button.dart';
 import '../components/textfield.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -46,27 +47,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: _loginController,
               ),
               NeumorphicTextField(
-                
                 hintText: "Password",
                 controller: _passwordController,
               ),
               const SizedBox(height: 20),
-              NeumorphicButton(
+              MyNeumorphicButton(
+                text: "Login",
                 onPressed: () => login(),
-                style: NeumorphicStyle(
-                  shape: NeumorphicShape.flat,
-                  boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(
-                    Radius.circular(35),
-                  )),
-                  depth: 5,
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Text(
-                    "Login",
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
               )
             ]
           ],

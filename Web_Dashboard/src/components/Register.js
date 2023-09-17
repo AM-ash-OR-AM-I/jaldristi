@@ -31,8 +31,11 @@ const Register = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
         console.log("Registration successful");
-        navigate("/login");
+        const userType = data.user.user_type;
+        localStorage.setItem("userType", userType);
+        navigate("/dashboard");
       } else {
         console.error("Registration failed");
       }

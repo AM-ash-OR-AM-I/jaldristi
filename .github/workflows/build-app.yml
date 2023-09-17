@@ -1,0 +1,37 @@
+name: Flutter Build app
+
+on: 
+  push:
+    tags:
+      - "v*.*.*"
+
+env:
+  APP_NAME: "JalDrishti"
+
+jobs:
+  build:
+    if: github.repository_owner!='am-ash-or-am-i'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/jal_dristi_app/
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'beta'
+      - run: flutter --version
+      - run: flutter pub get
+      - run: flutter build apk
+      - name: Release APK
+        id: upload-release-asset 
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{env.APP_NAME}}-${{github.ref_name}}.apk
+          files: ./app/jal_dristi_app/build/app/outputs/apk/release/app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
