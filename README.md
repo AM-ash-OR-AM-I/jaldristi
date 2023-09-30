@@ -25,17 +25,15 @@
 ---
 
 ## Table of Contents
-
-- [Team-14](#team-14)
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Problem Statement](#problem-statement)
-  - [Screenshots](#screenshots)
-  - [Releases](#releases)
-  - [Features](#features)
-  - [Architecture](#architecture)
-  - [Demo](#demo)
-  - [Installation](#installation)
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Problem Statement](#problem-statement)
+- [Screenshots](#screenshots)
+- [Releases](#releases)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Demo](#demo)
+- [Installation](#installation)
 
 ## Introduction
 
